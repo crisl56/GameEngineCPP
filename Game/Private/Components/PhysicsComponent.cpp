@@ -2,6 +2,7 @@
 #include "Game/Public/Components/TransformComponent.h"
 #include "Game/Public/Actor.h"
 #include "Game/Public/SubSystems/PhysicsSystem.h"
+#include "Game/Public/Components/CircleColliderComponent.h"
 
 PhysicsComponent::PhysicsComponent(std::weak_ptr<Actor> owner, exVector2 velocity, 
 									bool isStatic, bool isGravityEnabled): Component(owner), 
@@ -33,14 +34,16 @@ void PhysicsComponent::DoPhysics()
 	}
 }
 
+void PhysicsComponent::CollisionResolution() {
+
+}
+
+
 bool PhysicsComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent>& otherComponent)
 {
 	return false;
 }
 
-void PhysicsComponent::CollisonResolution()
-{
-}
 
 void PhysicsComponent::ListenForCollision(CollisionEventSignature& delegateToAdd)
 {

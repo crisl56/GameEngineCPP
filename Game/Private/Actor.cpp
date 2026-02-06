@@ -1,5 +1,6 @@
 #include "Game/Public/Actor.h"
 #include "Game/Public/Actors/Ball.h"
+#include "Game/Public/SubSystems/TickSystem.h"
 
 Actor::Actor()
 {
@@ -11,7 +12,7 @@ Actor::~Actor()
 
 void Actor::BeginPlay()
 {
-	// TODO
+	TICK_ENGINE.AddActor(weak_from_this());
 }
 
 void Actor::EndPlay()

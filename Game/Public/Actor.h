@@ -8,6 +8,7 @@
 class Actor : public ILifetimeInterface, public std::enable_shared_from_this<Actor> // allows us to create shared pointer from self
 {
 public:
+
 	Actor();
 	virtual ~Actor();
 
@@ -23,6 +24,16 @@ private:
 #pragma region TemplateRegion
 
 public:
+
+	template<std::derived_from<Actor> ActorType, typename ...Args>
+	static std::shared_ptr<ActorType> SpawnActorOfType(exVector2 SpawnLocation, Args... Arguments) {
+		std::shared_ptr<ActorType> SpawnedActor = std::make_shared<ActorType>(Arguments...);
+
+		SpawnedActor->BeginPlay();
+		SpawnedActor->AddComponentOfType<TransformComponent>(SpawnLocation);
+
+		return SpawnedActor;
+	}
 
 	// typename ...Args means I can take multiple arbitrary amount of arguments
 	template<std::derived_from<Component> ComponentType, typename ...Args>

@@ -44,5 +44,6 @@ private:
 
 	exVector2					mTextPosition;
 
-	std::shared_ptr<Ball>		mBall;
+	std::shared_ptr<Ball>		mBall_First;
+	std::shared_ptr<Ball>		mBall_Second;
 };

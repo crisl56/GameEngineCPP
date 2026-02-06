@@ -23,6 +23,7 @@ struct exVector2
 	{
 	}
 
+	// when using structs we can creater operators to add and multiplty objects
 	exVector2 operator+=(const exVector2& OtherVector)
 	{
 		x += OtherVector.x;

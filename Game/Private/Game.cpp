@@ -12,6 +12,8 @@
 #include "Game/Public/Actors/Ball.h"
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/SubSystems/PhysicsSystem.h"
+#include "Game/Public/SubSystems/RenderSystem.h"
+#include "Game/Public/SubSystems/TickSystem.h"
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -48,21 +50,27 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mTextPosition.x = 50.0f;
 	mTextPosition.y = 50.0f;
 
-	float Radius = 50.0f;
-	exVector2 Center;
-	Center.x = 300;
-	Center.y = 400;
+	float Radius = 25.0f;
 
-	exColor Color;
-	Color.mColor[0] = 255;
-	Color.mColor[1] = 50;
-	Color.mColor[2] = 150;
-	Color.mColor[3] = 255;
+	exColor Color1;
+	Color1.mColor[0] = 255;
+	Color1.mColor[1] = 50;
+	Color1.mColor[2] = 150;
+	Color1.mColor[3] = 255;
 
-	mBall = std::make_shared<Ball>(Radius, Color);
-	mBall->BeginPlay();
-	/*mBall->AddComponentOfType<Component>();*/
-	//mBall->AddComponentOfType<TransformComponent>(Center);
+	exColor Color2;
+	Color2.mColor[0] = 255;
+	Color2.mColor[1] = 50;
+	Color2.mColor[2] = 50;
+	Color2.mColor[3] = 255;
+
+	mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 300.0f), Radius, Color1);
+
+	mBall_Second = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 100.0f), Radius, Color2);
+
+	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_Second->GetComponentOfType<PhysicsComponent>()) {
+		BallPhysicsComp->SetVelocity(exVector2(0.0f, 0.5f));
+	}
 }
 
 //-----------------------------------------------------------------
@@ -292,27 +300,22 @@ void MyGame::Run( float fDeltaT )
 	//mEngine->DrawBox(p1, p2, c, 0);
 	*/
 
-	if (std::shared_ptr<RenderComponent> RenderComp = mBall->GetComponentOfType<RenderComponent>())
-	{
-		RenderComp->Render(mEngine);
-	}
-
-	mBall->Tick(fDeltaT);
-
 	exVector2 BallVelocity(0.0f, 0.0f);
 	if (mUp) {
-		BallVelocity.y = -0.5f;
+		BallVelocity.y = -2.5f;
 	}
 	if (mDown) {
-		BallVelocity.y = 0.5f;
+		BallVelocity.y = 2.5f;
 	}
 
-	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall->GetComponentOfType<PhysicsComponent>())
+	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_First->GetComponentOfType<PhysicsComponent>())
 	{
 		BallPhysicsComp->SetVelocity(BallVelocity);
 	}
-	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 
+	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
+	RENDER_ENGINE.RenderUpdate(mEngine);
+	TICK_ENGINE.TickUpdate(fDeltaT);
 	// mBall->SetBallPosition(mTextPosition);
 }
 

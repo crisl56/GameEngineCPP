@@ -2,6 +2,8 @@
 #include "Game/Public/Components/TransformComponent.h"
 #include "Game/Public/Components/CircleRenderComponent.h"
 #include "Game/Public/Components/PhysicsComponent.h"
+#include "Game/Public/Components/CircleColliderComponent.h"
+#include "Game/Public/Utils.h"
 
 Ball::Ball(float BallRadius, exColor BallColor)
 {
@@ -23,7 +25,31 @@ Ball::Ball(float BallRadius, exColor BallColor)
 
 void Ball::BeginPlay()
 {
-	AddComponentOfType<TransformComponent>(exVector2{ 200.0f, 300.0f });
-	AddComponentOfType<CircleRenderComponent>(exColor({ 0 , 255, 255, 255 }), 100.0f);
-	AddComponentOfType<PhysicsComponent>();
+	Actor::BeginPlay();
+
+	AddComponentOfType<CircleRenderComponent>(mColor, mRadius);
+	std::tuple<std::shared_ptr<CircleColliderComponent>, bool, String> ResultCircleCollider = AddComponentOfType<CircleColliderComponent>(mRadius);
+	//AddComponentOfType<CircleColliderComponent>(mRadius+5.0f); // example 
+
+	if(std::shared_ptr<CircleColliderComponent> CircleColliderComp = std::get<0>(ResultCircleCollider))
+	{
+		// NOTE: Both works
+		//std::function<void(std::weak_ptr<Actor>, const exVector2)> CollisionDelgate = std::bind(&Ball::OnCollision, this, std::placeholders::_1, std::placeholders::_2);
+		CollisionEventSignature CollisionDelgate = std::bind(&Ball::OnCollision, this, std::placeholders::_1, std::placeholders::_2);
+		CircleColliderComp->ListenForCollision(CollisionDelgate);
+	}
+}
+
+void Ball::OnCollision(std::weak_ptr<Actor>, const exVector2)
+{
+	if (std::shared_ptr<RenderComponent> RenderComp = GetComponentOfType<RenderComponent>()) {
+
+		exColor Color1;
+		Color1.mColor[0] = 20;
+		Color1.mColor[1] = 255;
+		Color1.mColor[2] = 120;
+		Color1.mColor[3] = 255;
+
+		RenderComp->SetColor(Color1);
+	}
 }

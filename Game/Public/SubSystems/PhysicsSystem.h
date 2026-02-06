@@ -25,10 +25,11 @@ private:
 
 	PhysicsEngine();
 
+	// Delete the copy constructor and copy assignment so the singleton can't be copied over
 	PhysicsEngine(const PhysicsEngine& OtherEngine) = delete;
 	PhysicsEngine& operator = (const PhysicsEngine& OtherEngine) = delete;
 
-	//Make sure you can only have one
+	//Make sure you can only have one with unique_ptr
 	static std::unique_ptr<PhysicsEngine> sPhysicsEngine;
 
 	std::list<std::weak_ptr<PhysicsComponent>> mPhysicsComponent;
