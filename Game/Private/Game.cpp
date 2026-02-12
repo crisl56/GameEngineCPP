@@ -10,6 +10,7 @@
 #include "Engine/Public/EngineInterface.h"
 #include "Engine/Public/SDL.h"
 #include "Game/Public/Actors/Ball.h"
+#include "Game/Public/Actors/Square.h"
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/SubSystems/PhysicsSystem.h"
 #include "Game/Public/SubSystems/RenderSystem.h"
@@ -24,10 +25,10 @@ const char* gWindowName = "Super Amazing Handsome Smart Superb Nice Good Fine Be
 //-----------------------------------------------------------------
 
 MyGame::MyGame()
-	: mEngine( nullptr )
-	, mFontID( -1 )
-	, mUp( false )
-	, mDown( false )
+	: mEngine(nullptr)
+	, mFontID(-1)
+	, mUp(false)
+	, mDown(false)
 {
 }
 
@@ -41,11 +42,11 @@ MyGame::~MyGame()
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-void MyGame::Initialize( exEngineInterface* pEngine )
+void MyGame::Initialize(exEngineInterface* pEngine)
 {
 	mEngine = pEngine;
 
-	mFontID = mEngine->LoadFont( "Resources/IndieFlower-Regular.ttf", 32 );
+	mFontID = mEngine->LoadFont("Resources/IndieFlower-Regular.ttf", 32);
 
 	mTextPosition.x = 50.0f;
 	mTextPosition.y = 50.0f;
@@ -64,9 +65,19 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	Color2.mColor[2] = 50;
 	Color2.mColor[3] = 255;
 
+	exColor Color3;
+	Color3.mColor[0] = 50;
+	Color3.mColor[1] = 150;
+	Color3.mColor[2] = 255;
+	Color3.mColor[3] = 255;
+
 	mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 300.0f), Radius, Color1);
 
 	mBall_Second = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 100.0f), Radius, Color2);
+
+	// Spawn a Square actor
+	float SquareSize = 50.0f;
+	mSquare = Actor::SpawnActorOfType<Square>(exVector2(400.0f, 300.0f), SquareSize, Color3);
 
 	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_Second->GetComponentOfType<PhysicsComponent>()) {
 		BallPhysicsComp->SetVelocity(exVector2(0.0f, 0.5f));
@@ -85,7 +96,7 @@ const char* MyGame::GetWindowName() const
 //-----------------------------------------------------------------
 
 // exColor is a unsigned Char
-void MyGame::GetClearColor( exColor& color ) const
+void MyGame::GetClearColor(exColor& color) const
 {
 	color.mColor[0] = 128;
 	color.mColor[1] = 128;
@@ -96,7 +107,7 @@ void MyGame::GetClearColor( exColor& color ) const
 //-----------------------------------------------------------------
 
 // SDL_Event can handle all the types of inputs, windows
-void MyGame::OnEvent( SDL_Event* pEvent )
+void MyGame::OnEvent(SDL_Event* pEvent)
 {
 }
 
@@ -107,7 +118,7 @@ void MyGame::OnEvent( SDL_Event* pEvent )
 void MyGame::OnEventsConsumed()
 {
 	int nKeys = 0;
-	const Uint8 *pState = SDL_GetKeyboardState( &nKeys ); // Updates nKeys to  an int
+	const Uint8* pState = SDL_GetKeyboardState(&nKeys); // Updates nKeys to  an int
 
 	//mUp = pState[SDL_SCANCODE_UP];
 	mUp = pState[SDL_SCANCODE_W];
@@ -124,7 +135,7 @@ void MyGame::OnEventsConsumed()
 // Run is like void Update()
 //  - Fires every frame
 //  - Delta is returned which is the time between each frame
-void MyGame::Run( float fDeltaT )
+void MyGame::Run(float fDeltaT)
 {
 	/*
 	* // SNOWMAN
@@ -208,7 +219,7 @@ void MyGame::Run( float fDeltaT )
 
 	// Snowman Eyes
 
-	
+
 	p1.x = 620.0f;
 	p1.y = 250.0f;
 
@@ -318,4 +329,3 @@ void MyGame::Run( float fDeltaT )
 	TICK_ENGINE.TickUpdate(fDeltaT);
 	// mBall->SetBallPosition(mTextPosition);
 }
-
