@@ -1,4 +1,5 @@
 #include "Game/Public/Components/CircleColliderComponent.h"
+#include "Game/Public/Components/SquareColliderComponent.h"
 #include "Game/Public/Components/TransformComponent.h"
 #include "Game/Public/Actor.h"
 
@@ -56,9 +57,6 @@ bool CircleColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 			// Owner Center Pos
 			exVector2 SelfCenterPos;
 			
-			// Square Center Pos
-			exVector2 OtherCenterPos;
-			
 			// Get Center Pos
 			if (!mOwner.expired()) 
 			{
@@ -67,6 +65,11 @@ bool CircleColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 					SelfCenterPos = TransformComp->GetLocation();
 				}
 			}
+			
+			// Other Square Variables
+			exVector2 OtherCenterPos;
+			float OtherWidth = OtherSquareColliderComponent->GetWidth();
+			float OtherHeight = OtherSquareColliderComponent->GetHeight();
 			
 			// Get Square Center Pos
 			if (!otherComponent.lock()->GetOwner().expired()) 
@@ -77,7 +80,24 @@ bool CircleColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 				}
 			}
 			
+			// Calculate closest edges
+			float testX = SelfCenterPos.x;
+			float testY = SelfCenterPos.y;
 			
+			// Closest X edge
+			if (SelfCenterPos.x < OtherCenterPos.x) testX = OtherCenterPos.x;
+			else if (SelfCenterPos.x > OtherCenterPos.x + OtherWidth) testX = OtherCenterPos.x + OtherWidth;
+			// Closest Y edge
+			if (SelfCenterPos.y < OtherCenterPos.y) testY = OtherCenterPos.y;
+			else if (SelfCenterPos.y > OtherCenterPos.y + OtherHeight) testY = OtherCenterPos.y + OtherHeight;
+			
+			// Get distance from closest edges
+			float distX = SelfCenterPos.x - testX;
+			float distY = SelfCenterPos.y - testY;
+			float distance = sqrt(distX * distX + distY * distY);
+			
+			// Return true if distance is less or equals than radius
+			return distance <= mRadius;
 		} 
 	}
 
