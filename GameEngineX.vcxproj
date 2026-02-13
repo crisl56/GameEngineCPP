@@ -153,6 +153,7 @@
     <ClInclude Include="Game\Public\Component.h" />
     <ClInclude Include="Game\Public\Components\PhysicsComponent.h" />
     <ClInclude Include="Game\Public\Components\RenderComponent.h" />
+    <ClInclude Include="Game\Public\Components\SquareRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\TransformComponent.h" />
     <ClInclude Include="Game\Public\ComponentTypes.h" />
     <ClInclude Include="Game\Public\Game.h" />
@@ -165,6 +166,7 @@
   <ItemGroup>
     <ClCompile Include="Game\Private\Actor.cpp" />
     <ClCompile Include="Game\Private\Actors\Ball.cpp" />
+    <ClCompile Include="Game\Private\Actors\Square.cpp" />
     <ClCompile Include="Game\Private\Component.cpp" />
     <ClCompile Include="Game\Private\Components\CircleColliderComponent.cpp" />
     <ClCompile Include="Game\Private\Components\CircleRenderComponent.cpp" />
@@ -175,6 +177,8 @@
     <ClCompile Include="Game\Private\Components\RenderComponent.cpp" />
     <ClCompile Include="Game\Private\SubSystems\PhysicsSystem.cpp" />
     <ClCompile Include="Game\Private\SubSystems\RenderSystem.cpp" />
+    <ClCompile Include="Game\Private\Components\SquareRenderComponent.cpp" />
+    <ClCompile Include="Game\Public\Actors\Square.h" />
     <ClCompile Include="Game\Public\SubSystems\TickSystem.cpp" />
     <ClCompile Include="Game\Public\SubSystems\TickSystem.h" />
   </ItemGroup>
