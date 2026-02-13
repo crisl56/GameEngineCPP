@@ -40,6 +40,8 @@ void Ball::BeginPlay()
 	}
 }
 
+
+
 void Ball::OnCollision(std::weak_ptr<Actor>, const exVector2)
 {
 	if (std::shared_ptr<RenderComponent> RenderComp = GetComponentOfType<RenderComponent>()) {

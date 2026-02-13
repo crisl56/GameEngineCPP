@@ -10,6 +10,7 @@
 #include "Engine/Public/EngineInterface.h"
 #include "Engine/Public/SDL.h"
 #include "Game/Public/Actors/Ball.h"
+#include "Game/Public/Actors/Square.h"
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/SubSystems/PhysicsSystem.h"
 #include "Game/Public/SubSystems/RenderSystem.h"
@@ -52,6 +53,7 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 
 	float Radius = 25.0f;
 
+
 	exColor Color1;
 	Color1.mColor[0] = 255;
 	Color1.mColor[1] = 50;
@@ -67,6 +69,17 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 300.0f), Radius, Color1);
 
 	mBall_Second = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 100.0f), Radius, Color2);
+
+	exVector2 Point1;
+	exVector2 Point2;
+
+	Point1.x = 500;
+	Point1.y = 500;
+
+	Point2.x = 600;
+	Point2.y = 600;
+
+	mSquare = Actor::SpawnActorOfType<Square>(exVector2(300.0f, 300.0f), Point1, Point2, Color1);
 
 	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_Second->GetComponentOfType<PhysicsComponent>()) {
 		BallPhysicsComp->SetVelocity(exVector2(0.0f, 0.5f));
@@ -299,6 +312,26 @@ void MyGame::Run( float fDeltaT )
 
 	//mEngine->DrawBox(p1, p2, c, 0);
 	*/
+
+
+
+	exVector2 p1, p2;
+	exColor c;
+
+	c.mColor[0] = 0;
+	c.mColor[1] = 0;
+	c.mColor[2] = 255;
+	c.mColor[3] = 255;
+
+	// Start
+	p1.x = 10;
+	p1.y = 10;
+
+	//End
+	p2.x = 10;
+	p2.y = 10;
+
+	mEngine->DrawBox(p1, p2, c, 0);
 
 	exVector2 BallVelocity(0.0f, 0.0f);
 	if (mUp) {

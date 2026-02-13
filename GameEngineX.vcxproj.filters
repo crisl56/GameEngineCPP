@@ -48,6 +48,7 @@
     <ClInclude Include="Game\Public\SubSystems\PhysicsSystem.h" />
     <ClInclude Include="Game\Public\Components\CircleColliderComponent.h" />
     <ClInclude Include="Game\Public\SubSystems\RenderSystem.h" />
+    <ClInclude Include="Game\Public\Components\SquareRenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Private\Main.cpp">
@@ -90,6 +91,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Public\SubSystems\TickSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Components\SquareRenderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Public\Actors\Square.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

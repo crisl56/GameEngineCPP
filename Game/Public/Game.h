@@ -13,6 +13,8 @@
 #include "Game/Public/Utils.h"
 
 class Ball;
+class Square;
+
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
@@ -46,4 +48,5 @@ private:
 
 	std::shared_ptr<Ball>		mBall_First;
 	std::shared_ptr<Ball>		mBall_Second;
+	std::shared_ptr<Square>		mSquare;
 };
