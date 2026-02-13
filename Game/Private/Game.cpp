@@ -94,9 +94,9 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	// Pong Ball Creation
 	//-----------------------------------------------------------------
 	
-	const float BallRadius = 10.0f;
-	const exVector2 BallInitialPosition(0.0f, 0.0f);
-	const exVector2 BallInitialVelocity(25.0f, 0.0f);
+	const float BallRadius = 25.0f;
+	const exVector2 BallInitialPosition(0.0f, 250.0f);
+	const exVector2 BallInitialVelocity(15.0f, 0.0f);
 	
 	exColor BallColor;
 	BallColor.mColor[0] = 255;
