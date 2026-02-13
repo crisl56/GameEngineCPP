@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\Square.obj",
+            "outputs": [
+                "OutGame\\Square.h_CE0F646A257294B1.ifc.dt.module.json",
+                "OutGame\\Square.h_CE0F646A257294B1.ifc.dt.d.json",
+                "OutGame\\Square.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\Public\\Repos\\GameEngineCPP\\Game\\Public\\Actors\\Square.h",
+                    "source-path": "c:\\users\\public\\repos\\gameenginecpp\\game\\public\\actors\\square.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Public\Actors\PlayerActor.h" />
     <ClInclude Include="Game\Public\Components\CircleColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
     <ClInclude Include="Game\Public\Actor.h" />

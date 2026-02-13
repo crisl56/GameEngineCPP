@@ -148,9 +148,18 @@ void MyGame::OnEventsConsumed()
 {
 	int nKeys = 0;
 	const Uint8 *pState = SDL_GetKeyboardState( &nKeys ); // Updates nKeys to  an int
-	
+
 	mUp = pState[SDL_SCANCODE_UP];
 	mDown = pState[SDL_SCANCODE_DOWN];
+
+	// Using up arrow and down arrow
+	mPlayerOneUp = pState[SDL_SCANCODE_UP];
+	mPlayerOneUp = pState[SDL_SCANCODE_DOWN];
+
+	// using w and s
+	mPlayerTwoDown = pState[SDL_SCANCODE_W];
+	mPlayerTwoDown = pState[SDL_SCANCODE_S];
+
 
 	// Those keyboard inputs are already built in
 	// They are just enums as int 

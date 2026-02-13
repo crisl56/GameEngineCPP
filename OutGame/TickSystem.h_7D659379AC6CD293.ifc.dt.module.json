@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TickSystem.obj",
+            "outputs": [
+                "OutGame\\TickSystem.h_7D659379AC6CD293.ifc.dt.module.json",
+                "OutGame\\TickSystem.h_7D659379AC6CD293.ifc.dt.d.json",
+                "OutGame\\TickSystem.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\pg29cris\\VFS\\T3\\C++\\EngineXForStudent\\Game\\Public\\SubSystems\\TickSystem.h",
+                    "source-path": "c:\\users\\pg29cris\\vfs\\t3\\c++\\enginexforstudent\\game\\public\\subsystems\\ticksystem.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

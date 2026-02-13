@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TickSystem.h.obj",
+            "outputs": [
+                "C:\\Users\\Public\\Repos\\GameEngineCPP\\OutGame\\vc143.pdb",
+                "OutGame\\",
+                "C:\\Users\\Public\\Repos\\GameEngineCPP\\OutGame\\TickSystem.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "Game\\Public\\SubSystems\\TickSystem.h",
+                    "source-path": "c:\\users\\public\\repos\\gameenginecpp\\game\\public\\subsystems\\ticksystem.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

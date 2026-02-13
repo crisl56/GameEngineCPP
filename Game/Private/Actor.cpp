@@ -22,9 +22,9 @@ void Actor::EndPlay()
 
 void Actor::Tick(const float DeltaSceonds)
 {
-	for (std::shared_ptr<Component> ComponetIt : mComponents)
+	for (std::shared_ptr<Component> ComponentIt : mComponents)
 	{
-		ComponetIt->Tick(DeltaSceonds);
+		ComponentIt->Tick(DeltaSceonds);
 	}
 	// TODO
 }

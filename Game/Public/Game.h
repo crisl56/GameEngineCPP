@@ -44,7 +44,14 @@ private:
 	bool						mUp;
 	bool						mDown;
 
-	// exVector2					mTextPosition;
+	// TODO: Change these to unsigned ints later
+	bool mPlayerOneUp;
+	bool mPlayerOneDown;
+
+	bool mPlayerTwoUp;
+	bool mPlayerTwoDown;
+
+	exVector2					mTextPosition;
 
 	std::shared_ptr<Ball>		mBall;
 	// std::shared_ptr<Square>		mSquare;
