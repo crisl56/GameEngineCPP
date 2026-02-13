@@ -26,7 +26,6 @@ const char* gWindowName = "Super Amazing Handsome Smart Superb Nice Good Fine Be
 
 MyGame::MyGame()
 	: mEngine( nullptr )
-	, mFontID( -1 )
 	, mUp( false )
 	, mDown( false )
 {
@@ -45,44 +44,72 @@ MyGame::~MyGame()
 void MyGame::Initialize( exEngineInterface* pEngine )
 {
 	mEngine = pEngine;
+	
+	//-----------------------------------------------------------------
+	// Score Renderer Creation
+	//-----------------------------------------------------------------
+	
+	// TODO: Add here Score Render creation
+	
+	// EXAMPLE
+	// Text
+	// mFontID = mEngine->LoadFont( "Resources/IndieFlower-Regular.ttf", 32 );
+	//
+	// mTextPosition.x = 50.0f;
+	// mTextPosition.y = 50.0f;
+	
+	//-----------------------------------------------------------------
+	// Pong Walls (Top & Bottom)
+	//-----------------------------------------------------------------
+	
+	// TODO: Add here pong walls creation
+	
+	// EXAMPLES
+	// Square
+	
+	// exVector2 Point1;
+	// exVector2 Point2;
+	//
+	// Point1.x = 500;
+	// Point1.y = 500;
+	//
+	// Point2.x = 600;
+	// Point2.y = 600;
 
-	mFontID = mEngine->LoadFont( "Resources/IndieFlower-Regular.ttf", 32 );
+	// mSquare = Actor::SpawnActorOfType<Square>(exVector2(300.0f, 300.0f), Point1, Point2, Color1);
+	
+	//-----------------------------------------------------------------
+	// Goal Actors (Left & Right)
+	//-----------------------------------------------------------------
+	
+	// TODO: Add here goal actors creation
+	
+	//-----------------------------------------------------------------
+	// Paddles Creation
+	//-----------------------------------------------------------------
+	
+	// TODO: Add here paddles creation
+	
+	//-----------------------------------------------------------------
+	// Pong Ball Creation
+	//-----------------------------------------------------------------
+	
+	const float BallRadius = 10.0f;
+	const exVector2 BallInitialPosition(0.0f, 0.0f);
+	const exVector2 BallInitialVelocity(25.0f, 0.0f);
+	
+	exColor BallColor;
+	BallColor.mColor[0] = 255;
+	BallColor.mColor[1] = 50;
+	BallColor.mColor[2] = 150;
+	BallColor.mColor[3] = 255;
 
-	mTextPosition.x = 50.0f;
-	mTextPosition.y = 50.0f;
-
-	float Radius = 25.0f;
-
-
-	exColor Color1;
-	Color1.mColor[0] = 255;
-	Color1.mColor[1] = 50;
-	Color1.mColor[2] = 150;
-	Color1.mColor[3] = 255;
-
-	exColor Color2;
-	Color2.mColor[0] = 255;
-	Color2.mColor[1] = 50;
-	Color2.mColor[2] = 50;
-	Color2.mColor[3] = 255;
-
-	mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 300.0f), Radius, Color1);
-
-	mBall_Second = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 100.0f), Radius, Color2);
-
-	exVector2 Point1;
-	exVector2 Point2;
-
-	Point1.x = 500;
-	Point1.y = 500;
-
-	Point2.x = 600;
-	Point2.y = 600;
-
-	mSquare = Actor::SpawnActorOfType<Square>(exVector2(300.0f, 300.0f), Point1, Point2, Color1);
-
-	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_Second->GetComponentOfType<PhysicsComponent>()) {
-		BallPhysicsComp->SetVelocity(exVector2(0.0f, 0.5f));
+	mBall = Actor::SpawnActorOfType<Ball>(exVector2(BallInitialPosition.x, BallInitialPosition.y), BallRadius, BallColor);
+	
+	// Initialize ball with an initial velocity
+	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall->GetComponentOfType<PhysicsComponent>()) 
+	{
+		BallPhysicsComp->SetVelocity(exVector2(BallInitialVelocity.x, BallInitialVelocity.y));
 	}
 }
 
@@ -121,9 +148,8 @@ void MyGame::OnEventsConsumed()
 {
 	int nKeys = 0;
 	const Uint8 *pState = SDL_GetKeyboardState( &nKeys ); // Updates nKeys to  an int
-
-	//mUp = pState[SDL_SCANCODE_UP];
-	mUp = pState[SDL_SCANCODE_W];
+	
+	mUp = pState[SDL_SCANCODE_UP];
 	mDown = pState[SDL_SCANCODE_DOWN];
 
 	// Those keyboard inputs are already built in
@@ -139,182 +165,6 @@ void MyGame::OnEventsConsumed()
 //  - Delta is returned which is the time between each frame
 void MyGame::Run( float fDeltaT )
 {
-	/*
-	* // SNOWMAN
-	if ( mUp )
-	{
-		mTextPosition.y -= 40.0f * fDeltaT;
-	}
-	else if ( mDown )
-	{
-		mTextPosition.y += 40.0f * fDeltaT;
-	}
-
-	exVector2 p1, p2;
-	exColor c;
-	float r;
-
-	c.mColor[0] = 119;
-	c.mColor[1] = 132;
-	c.mColor[2] = 105;
-	c.mColor[3] = 255;
-
-	p1.x = 175.0f;
-	p1.y = 175.0f;
-
-	r = 25.0f;
-
-	mEngine->DrawCircle( p1, r, c, 0 );
-
-	p1.x = 100.0f;
-	p1.y = 100.0f;
-
-	p2.x = 200.0f;
-	p2.y = 200.0f;
-
-	c.mColor[0] = 255;
-	c.mColor[1] = 0;
-	c.mColor[2] = 0;
-
-	mEngine->DrawBox( p1, p2, c, 1 );
-
-	p1.x = 400.0f;
-	p1.y = 400.0f;
-
-	p2.x = 500.0f;
-	p2.y = 500.0f;
-
-	mEngine->DrawLineBox( p1, p2, c, 1 );
-
-	p1.x = 400.0f;
-	p1.y = 400.0f;
-
-	c.mColor[0] = 0;
-	c.mColor[1] = 0;
-	c.mColor[2] = 0;
-
-	mEngine->DrawCircle( p1, r, c, 2 );
-
-	mEngine->DrawText( mFontID, mTextPosition, "VFS", c, 0 );
-
-	// Snowman - Body
-	p1.x = 600.0f;
-	p1.y = 250.0f;
-
-	c.mColor[0] = 255;
-	c.mColor[1] = 255;
-	c.mColor[2] = 255;
-
-	mEngine->DrawCircle(p1, r, c, 2);
-
-	p1.y = 309.0f;
-
-	r = 35;
-
-	mEngine->DrawCircle(p1, r, c, 2);
-
-	p1.y = 384.0f;
-
-	r = 45;
-
-	mEngine->DrawCircle(p1, r, c, 2);
-
-	// Snowman Eyes
-
-	
-	p1.x = 620.0f;
-	p1.y = 250.0f;
-
-	c.mColor[0] = 0;
-	c.mColor[1] = 0;
-	c.mColor[2] = 0;
-
-	r = 5;
-
-	mEngine->DrawCircle(p1, r, c, 1);
-
-	p1.x = 580.0f;
-	p1.y = 250.0f;
-
-	c.mColor[0] = 0;
-	c.mColor[1] = 0;
-	c.mColor[2] = 0;
-
-	r = 5;
-
-	mEngine->DrawCircle(p1, r, c, 1);
-
-	// Snowman Nose
-
-	p1.x = 600.0f;
-	p1.y = 225.0f;
-
-	c.mColor[0] = 252;
-	c.mColor[1] = 90;
-	c.mColor[2] = 3;
-
-
-	mEngine->DrawText(mFontID, p1, ">", c, 0);
-
-	// Snowman Smile
-
-	p1.x = 595.0f;
-	p1.y = 240.0f;
-
-	c.mColor[0] = 0;
-	c.mColor[1] = 0;
-	c.mColor[2] = 0;
-
-
-	mEngine->DrawText(mFontID, p1, "o", c, 0);
-
-	// Snowman Arms
-
-	// Start
-	p1.x = 630.0f;
-	p1.y = 300.0f;
-
-	//End
-	p2.x = 670;
-	p2.y = 275;
-
-	c.mColor[0] = 0;
-	c.mColor[1] = 0;
-	c.mColor[2] = 0;
-
-
-	mEngine->DrawLine(p1, p2, c, 0);
-
-	// Start
-	p1.x = 570.0f;
-	p1.y = 300.0f;
-
-	//End
-	p2.x = 520;
-	p2.y = 275;
-
-	c.mColor[0] = 0;
-	c.mColor[1] = 0;
-	c.mColor[2] = 0;
-
-
-	mEngine->DrawLine(p1, p2, c, 0);
-
-	// Draw box
-
-	// Start
-	p1.x = 600.0f;
-	p1.y = 250;
-
-	//End
-	p2.x = 625;
-	p2.y = 275;
-
-	//mEngine->DrawBox(p1, p2, c, 0);
-	*/
-
-
-
 	exVector2 p1, p2;
 	exColor c;
 
@@ -333,22 +183,7 @@ void MyGame::Run( float fDeltaT )
 
 	mEngine->DrawBox(p1, p2, c, 0);
 
-	exVector2 BallVelocity(0.0f, 0.0f);
-	if (mUp) {
-		BallVelocity.y = -2.5f;
-	}
-	if (mDown) {
-		BallVelocity.y = 2.5f;
-	}
-
-	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_First->GetComponentOfType<PhysicsComponent>())
-	{
-		BallPhysicsComp->SetVelocity(BallVelocity);
-	}
-
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 	RENDER_ENGINE.RenderUpdate(mEngine);
 	TICK_ENGINE.TickUpdate(fDeltaT);
-	// mBall->SetBallPosition(mTextPosition);
 }
-

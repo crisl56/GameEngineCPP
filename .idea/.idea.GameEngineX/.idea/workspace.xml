@@ -8,7 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8afded4-9936-4763-9799-30f1c6441b2d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Game/Private/Components/CircleColliderComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Private/Components/CircleColliderComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameEngineX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameEngineX/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Private/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Private/Game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Public/Game.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Public/Game.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +34,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "b__BallPhysicsComponent",
+    "git-widget-placeholder": "b__BallActor",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1770948506433</updated>
-      <workItem from="1770948508826" duration="4772000" />
+      <workItem from="1770948508826" duration="5877000" />
     </task>
     <servers />
   </component>
