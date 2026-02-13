@@ -1,5 +1,6 @@
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Actor.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\Actor.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Actors\Ball.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\Ball.obj
+C:\Users\Public\Repos\GameEngineCPP\Game\Private\Actors\PlayerActor.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\PlayerActor.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Actors\Square.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\Square.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Component.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\Component.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\CircleColliderComponent.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\CircleColliderComponent.obj

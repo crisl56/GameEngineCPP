@@ -7,7 +7,7 @@ class PlayerActor : public Actor {
 public:
 	PlayerActor(float speed, std::shared_ptr<bool> upKey, std::shared_ptr<bool> downKey);
 
-	virtual void BeginPlay();
+	virtual void BeginPlay() override;
 
 	void OnCollision(std::weak_ptr<Actor>, const exVector2);
 
