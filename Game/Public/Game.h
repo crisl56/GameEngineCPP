@@ -11,6 +11,7 @@
 #include "Game/Public/GameInterface.h"
 #include "Engine/Public/EngineTypes.h"
 #include "Game/Public/Utils.h"
+#include "Actors/PlayerActor.h"
 
 class Ball;
 class Square;
@@ -45,13 +46,16 @@ private:
 	bool						mDown;
 
 	// TODO: Change these to unsigned ints later
-	bool mPlayerOneUp;
-	bool mPlayerOneDown;
+	std::shared_ptr<bool> mPlayerOneUp;
+	std::shared_ptr<bool> mPlayerOneDown;
 
 	bool mPlayerTwoUp;
 	bool mPlayerTwoDown;
 
 	exVector2					mTextPosition;
+
+	std::shared_ptr<PlayerActor> mPlayer1;
+	std::shared_ptr<PlayerActor> mPlayer2;
 
 	std::shared_ptr<Ball>		mBall;
 	// std::shared_ptr<Square>		mSquare;

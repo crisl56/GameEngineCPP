@@ -16,11 +16,9 @@ public:
 
 protected:
 
-	SquareRenderComponent(std::weak_ptr<Actor> owner, exColor RenderColor, exVector2 p1, exVector2 p2);
+	SquareRenderComponent(std::weak_ptr<Actor> owner, exColor RenderColor, float width, float height);
 
 private:
-
-	exVector2 mP1;
-	exVector2 mP2;
-
+	float mWidth;
+	float mHeight;
 };

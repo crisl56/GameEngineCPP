@@ -14,7 +14,6 @@ void Square::BeginPlay()
 {
 	Actor::BeginPlay();
 
-	AddComponentOfType<SquareRenderComponent>(mColor, mPoint1, mPoint2);
 }
 
 void Square::OnCollision(std::weak_ptr<Actor>, const exVector2)

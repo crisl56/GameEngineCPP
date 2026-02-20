@@ -16,6 +16,8 @@ void Ball::BeginPlay()
 
 	AddComponentOfType<CircleRenderComponent>(mColor, mRadius);
 	AddComponentOfType<CircleColliderComponent>(mRadius);
+
+	// how transform????
 	
 	// std::tuple<std::shared_ptr<CircleColliderComponent>, bool, String> ResultCircleCollider = AddComponentOfType<CircleColliderComponent>(mRadius);
 	//

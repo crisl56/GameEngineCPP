@@ -2,10 +2,11 @@
 #include "Game/Public/Actor.h"
 #include "Engine/Public/EngineTypes.h"
 
-class PlayerActor : public Actor {
+class PlayerActor : public Actor 
+{
 
 public:
-	PlayerActor(float speed, std::shared_ptr<bool> upKey, std::shared_ptr<bool> downKey);
+	PlayerActor(float speed, exColor color, std::shared_ptr<bool> upKey, std::shared_ptr<bool> downKey, float width, float height);
 
 	virtual void BeginPlay() override;
 
@@ -15,6 +16,11 @@ public:
 
 private :
 	float mSpeed;
+	float mWidth;
+	float mHeight;
+
+	exColor mColor;
+
 	std::shared_ptr<bool> mUpKey;
 	std::shared_ptr<bool> mDownKey;
 };

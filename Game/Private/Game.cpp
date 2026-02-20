@@ -89,13 +89,30 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	//-----------------------------------------------------------------
 	
 	// TODO: Add here paddles creation
+
+	const float PaddleSpeed = 10.0f;
+
+	exColor PaddleColor;
+	PaddleColor.mColor[0] = 115;
+	PaddleColor.mColor[1] = 115;
+	PaddleColor.mColor[2] = 115;
+	PaddleColor.mColor[3] = 255;
+
+	const float Paddle1Width = 40.0f;
+	const float Paddle1Height = 80.0f;
+	const exVector2 InitialPaddle1Position(10.0f, 250.0f);
+
+	mPlayer1 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle1Position.x, InitialPaddle1Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, Paddle1Width, Paddle1Height);
+	
+	const exVector2 InitialPaddle2Position(790.0f, 250.0f);
+	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, Paddle1Width, Paddle1Height);
 	
 	//-----------------------------------------------------------------
 	// Pong Ball Creation
 	//-----------------------------------------------------------------
 	
 	const float BallRadius = 25.0f;
-	const exVector2 BallInitialPosition(0.0f, 250.0f);
+	const exVector2 BallInitialPosition(100.0f, 250.0f);
 	const exVector2 BallInitialVelocity(15.0f, 0.0f);
 	
 	exColor BallColor;
@@ -153,11 +170,14 @@ void MyGame::OnEventsConsumed()
 	mDown = pState[SDL_SCANCODE_DOWN];
 
 	// Using up arrow and down arrow
-	mPlayerOneUp = pState[SDL_SCANCODE_UP];
-	mPlayerOneUp = pState[SDL_SCANCODE_DOWN];
+	//mPlayerOneUp = std::make_shared<bool>(pState[SDL_SCANCODE_UP]);
+	//mPlayerOneDown = std::make_shared<bool>(pState[SDL_SCANCODE_DOWN]);
+
+	//mPlayerOneUp = std::make_shared<bool>(pState[SDL_SCANCODE_UP]);
+	//mPlayerOneDown = std::make_shared<bool>(pState[SDL_SCANCODE_DOWN]);
 
 	// using w and s
-	mPlayerTwoDown = pState[SDL_SCANCODE_W];
+	mPlayerTwoUp = pState[SDL_SCANCODE_W];
 	mPlayerTwoDown = pState[SDL_SCANCODE_S];
 
 
@@ -172,7 +192,7 @@ void MyGame::OnEventsConsumed()
 // Run is like void Update()
 //  - Fires every frame
 //  - Delta is returned which is the time between each frame
-void MyGame::Run( float fDeltaT )
+void MyGame::Run( float fDeltaT)
 {
 	exVector2 p1, p2;
 	exColor c;
@@ -189,6 +209,38 @@ void MyGame::Run( float fDeltaT )
 	//End
 	p2.x = 10;
 	p2.y = 10;
+
+	exVector2 PlayerOneVelocity(0.0f, 0.0f);
+	if (mUp)
+	{
+		PlayerOneVelocity.y = -2.5f;
+	}
+
+	if (mDown) 
+	{
+		PlayerOneVelocity.y = 2.5f;
+	}
+
+	exVector2 PlayerTwoVelocity(0.0f, 0.0f);
+	if (mPlayerTwoUp) 
+	{
+		PlayerTwoVelocity.y = -2.5f;
+	}
+
+	if (mPlayerTwoDown)
+	{
+		PlayerTwoVelocity.y = 2.5f;
+	}
+
+	if (std::shared_ptr<PhysicsComponent> PlayerOnePhysicsComp = mPlayer1->GetComponentOfType<PhysicsComponent>())
+	{
+		PlayerOnePhysicsComp->SetVelocity(PlayerOneVelocity);
+	}
+
+	if (std::shared_ptr<PhysicsComponent> PlayerTwoPhysicsComp = mPlayer2->GetComponentOfType<PhysicsComponent>())
+	{
+		PlayerTwoPhysicsComp->SetVelocity(PlayerTwoVelocity);
+	}
 
 	mEngine->DrawBox(p1, p2, c, 0);
 

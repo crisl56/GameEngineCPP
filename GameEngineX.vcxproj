@@ -154,6 +154,7 @@
     <ClInclude Include="Game\Public\Component.h" />
     <ClInclude Include="Game\Public\Components\PhysicsComponent.h" />
     <ClInclude Include="Game\Public\Components\RenderComponent.h" />
+    <ClInclude Include="Game\Public\Components\SquareColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\SquareRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\TransformComponent.h" />
     <ClInclude Include="Game\Public\ComponentTypes.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="Game\Private\Components\CircleColliderComponent.cpp" />
     <ClCompile Include="Game\Private\Components\CircleRenderComponent.cpp" />
     <ClCompile Include="Game\Private\Components\PhysicsComponent.cpp" />
+    <ClCompile Include="Game\Private\Components\SquareColliderComponent.cpp" />
     <ClCompile Include="Game\Private\Game.cpp" />
     <ClCompile Include="Game\Private\Main.cpp" />
     <ClCompile Include="Game\Private\Components\TransformComponent.cpp" />

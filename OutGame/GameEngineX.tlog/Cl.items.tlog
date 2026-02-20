@@ -6,6 +6,7 @@ C:\Users\Public\Repos\GameEngineCPP\Game\Private\Component.cpp;C:\Users\Public\R
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\CircleColliderComponent.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\CircleColliderComponent.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\CircleRenderComponent.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\CircleRenderComponent.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\PhysicsComponent.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\PhysicsComponent.obj
+C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\SquareColliderComponent.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\SquareColliderComponent.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Game.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\Game.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Main.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\Main.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\TransformComponent.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\TransformComponent.obj
