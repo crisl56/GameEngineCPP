@@ -19,7 +19,7 @@
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-const char* gWindowName = "Super Amazing Handsome Smart Superb Nice Good Fine Beautiful Game Engine";
+const char* gWindowName = "Super Amazing Handsome Smart Superb Nice Good Fine Beautiful Pong Game";
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
