@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TickSystem.obj",
+            "outputs": [
+                "OutGame\\TickSystem.h_680FB81FE464F713.ifc.dt.module.json",
+                "OutGame\\TickSystem.h_680FB81FE464F713.ifc.dt.d.json",
+                "OutGame\\TickSystem.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\julia\\OneDrive\\Documentos\\Projects\\C++\\GameEngineCPP\\Game\\Public\\SubSystems\\TickSystem.h",
+                    "source-path": "c:\\users\\julia\\onedrive\\documentos\\projects\\c++\\gameenginecpp\\game\\public\\subsystems\\ticksystem.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

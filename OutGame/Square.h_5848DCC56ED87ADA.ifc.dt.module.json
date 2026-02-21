@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\Square.obj",
+            "outputs": [
+                "OutGame\\Square.h_5848DCC56ED87ADA.ifc.dt.module.json",
+                "OutGame\\Square.h_5848DCC56ED87ADA.ifc.dt.d.json",
+                "OutGame\\Square.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\julia\\OneDrive\\Documentos\\Projects\\C++\\GameEngineCPP\\Game\\Public\\Actors\\Square.h",
+                    "source-path": "c:\\users\\julia\\onedrive\\documentos\\projects\\c++\\gameenginecpp\\game\\public\\actors\\square.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
