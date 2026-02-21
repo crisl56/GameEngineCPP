@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game\Public\Actors\PlayerActor.h" />
+    <ClInclude Include="Game\Public\Actors\ScoreKeeper.h" />
     <ClInclude Include="Game\Public\Components\CircleColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
     <ClInclude Include="Game\Public\Actor.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Game\Public\Components\RenderComponent.h" />
     <ClInclude Include="Game\Public\Components\SquareColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\SquareRenderComponent.h" />
+    <ClInclude Include="Game\Public\Components\TextRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\TransformComponent.h" />
     <ClInclude Include="Game\Public\ComponentTypes.h" />
     <ClInclude Include="Game\Public\Game.h" />
@@ -163,6 +165,7 @@
     <ClInclude Include="Game\Public\LifetimeInterface.h" />
     <ClInclude Include="Game\Public\SubSystems\PhysicsSystem.h" />
     <ClInclude Include="Game\Public\SubSystems\RenderSystem.h" />
+    <ClInclude Include="Game\Public\SubSystems\ScoreSystem.h" />
     <ClInclude Include="Game\Public\Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -182,8 +185,11 @@
     <ClCompile Include="Game\Private\SubSystems\PhysicsSystem.cpp" />
     <ClCompile Include="Game\Private\SubSystems\RenderSystem.cpp" />
     <ClCompile Include="Game\Private\Components\SquareRenderComponent.cpp" />
+    <ClCompile Include="Game\Private\Actors\ScoreKeeper.cpp" />
+    <ClCompile Include="Game\Private\SubSystems\ScoreSystem.cpp" />
     <ClCompile Include="Game\Public\Actors\Square.h" />
-    <ClCompile Include="Game\Public\SubSystems\TickSystem.cpp" />
+    <ClCompile Include="Game\Private\Components\TextRenderComponent.cpp" />
+    <ClCompile Include="Game\Private\SubSystems\TickSystem.cpp" />
     <ClCompile Include="Game\Public\SubSystems\TickSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

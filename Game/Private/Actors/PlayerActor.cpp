@@ -35,6 +35,7 @@ void PlayerActor::Tick(const float DeltaSceonds)
 
 	if (*mUpKey) {
 		PlayerVelocity.y = -mSpeed;
+
 	}
 	if (*mDownKey) {
 		PlayerVelocity.y = mSpeed;

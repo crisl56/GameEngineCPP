@@ -20,6 +20,8 @@ void SquareRenderComponent::Render(exEngineInterface* EngineInterface)
 					exVector2 p1 = { Center.x - halfExtents.x, Center.y - halfExtents.y };
 					exVector2 p2 = { Center.x + halfExtents.x, Center.y + halfExtents.y };
 					EngineInterface->DrawBox(p1, p2, mRenderColor, 1);
+
+					
 				}
 			}
 		}

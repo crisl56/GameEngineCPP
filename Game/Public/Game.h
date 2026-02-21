@@ -12,6 +12,8 @@
 #include "Engine/Public/EngineTypes.h"
 #include "Game/Public/Utils.h"
 #include "Actors/PlayerActor.h"
+#include "Actors/PlayerActor.h"
+#include "Actors/ScoreKeeper.h"
 
 class Ball;
 class Square;
@@ -40,7 +42,7 @@ private:
 
 	exEngineInterface*			mEngine;
 
-	// int							mFontID;
+	 int						mFontID;
 
 	bool						mUp;
 	bool						mDown;
@@ -57,6 +59,8 @@ private:
 
 	std::shared_ptr<PlayerActor> mPlayer1;
 	std::shared_ptr<PlayerActor> mPlayer2;
+
+	std::shared_ptr<ScoreKeeper> mScoreKeeper;
 
 	std::shared_ptr<Ball>		mBall;
 	// std::shared_ptr<Square>		mSquare;

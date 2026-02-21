@@ -14,6 +14,9 @@ C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\RenderComponent.cpp;
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\SubSystems\PhysicsSystem.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\PhysicsSystem.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\SubSystems\RenderSystem.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\RenderSystem.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\SquareRenderComponent.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\SquareRenderComponent.obj
+C:\Users\Public\Repos\GameEngineCPP\Game\Private\Actors\ScoreKeeper.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\ScoreKeeper.obj
+C:\Users\Public\Repos\GameEngineCPP\Game\Private\SubSystems\ScoreSystem.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\ScoreSystem.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Public\Actors\Square.h;C:\Users\Public\Repos\GameEngineCPP\OutGame\Square.h.obj
-C:\Users\Public\Repos\GameEngineCPP\Game\Public\SubSystems\TickSystem.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\TickSystem.obj
+C:\Users\Public\Repos\GameEngineCPP\Game\Private\Components\TextRenderComponent.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\TextRenderComponent.obj
+C:\Users\Public\Repos\GameEngineCPP\Game\Private\SubSystems\TickSystem.cpp;C:\Users\Public\Repos\GameEngineCPP\OutGame\TickSystem.obj
 C:\Users\Public\Repos\GameEngineCPP\Game\Public\SubSystems\TickSystem.h;C:\Users\Public\Repos\GameEngineCPP\OutGame\TickSystem.h.obj
