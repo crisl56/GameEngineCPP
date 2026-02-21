@@ -100,11 +100,11 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 
 	const float Paddle1Width = 40.0f;
 	const float Paddle1Height = 80.0f;
-	const exVector2 InitialPaddle1Position(10.0f, 250.0f);
+	const exVector2 InitialPaddle1Position(100.0f, 250.0f);
 
 	mPlayer1 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle1Position.x, InitialPaddle1Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, Paddle1Width, Paddle1Height);
 	
-	const exVector2 InitialPaddle2Position(790.0f, 250.0f);
+	const exVector2 InitialPaddle2Position(700.0f, 250.0f);
 	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, Paddle1Width, Paddle1Height);
 	
 	//-----------------------------------------------------------------
@@ -112,7 +112,7 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	//-----------------------------------------------------------------
 	
 	const float BallRadius = 25.0f;
-	const exVector2 BallInitialPosition(100.0f, 250.0f);
+	const exVector2 BallInitialPosition(500.0f, 250.0f);
 	const exVector2 BallInitialVelocity(15.0f, 0.0f);
 	
 	exColor BallColor;
@@ -170,8 +170,9 @@ void MyGame::OnEventsConsumed()
 	mDown = pState[SDL_SCANCODE_DOWN];
 
 	// Using up arrow and down arrow
-	//mPlayerOneUp = std::make_shared<bool>(pState[SDL_SCANCODE_UP]);
-	//mPlayerOneDown = std::make_shared<bool>(pState[SDL_SCANCODE_DOWN]);
+
+	mPlayerOneUp = std::make_shared<bool>(pState[SDL_SCANCODE_UP]);
+	mPlayerOneDown = std::make_shared<bool>(pState[SDL_SCANCODE_DOWN]);
 
 	//mPlayerOneUp = std::make_shared<bool>(pState[SDL_SCANCODE_UP]);
 	//mPlayerOneDown = std::make_shared<bool>(pState[SDL_SCANCODE_DOWN]);
@@ -194,55 +195,37 @@ void MyGame::OnEventsConsumed()
 //  - Delta is returned which is the time between each frame
 void MyGame::Run( float fDeltaT)
 {
-	exVector2 p1, p2;
-	exColor c;
+	//exVector2 PlayerOneVelocity(0.0f, 0.0f);
+	//if (mUp)
+	//{
+	//	PlayerOneVelocity.y = -2.5f;
+	//}
 
-	c.mColor[0] = 0;
-	c.mColor[1] = 0;
-	c.mColor[2] = 255;
-	c.mColor[3] = 255;
+	//if (mDown) 
+	//{
+	//	PlayerOneVelocity.y = 2.5f;
+	//}
 
-	// Start
-	p1.x = 10;
-	p1.y = 10;
+	//exVector2 PlayerTwoVelocity(0.0f, 0.0f);
+	//if (mPlayerTwoUp) 
+	//{
+	//	PlayerTwoVelocity.y = -2.5f;
+	//}
 
-	//End
-	p2.x = 10;
-	p2.y = 10;
+	//if (mPlayerTwoDown)
+	//{
+	//	PlayerTwoVelocity.y = 2.5f;
+	//}
 
-	exVector2 PlayerOneVelocity(0.0f, 0.0f);
-	if (mUp)
-	{
-		PlayerOneVelocity.y = -2.5f;
-	}
+	//if (std::shared_ptr<PhysicsComponent> PlayerOnePhysicsComp = mPlayer1->GetComponentOfType<PhysicsComponent>())
+	//{
+	//	PlayerOnePhysicsComp->SetVelocity(PlayerOneVelocity);
+	//}
 
-	if (mDown) 
-	{
-		PlayerOneVelocity.y = 2.5f;
-	}
-
-	exVector2 PlayerTwoVelocity(0.0f, 0.0f);
-	if (mPlayerTwoUp) 
-	{
-		PlayerTwoVelocity.y = -2.5f;
-	}
-
-	if (mPlayerTwoDown)
-	{
-		PlayerTwoVelocity.y = 2.5f;
-	}
-
-	if (std::shared_ptr<PhysicsComponent> PlayerOnePhysicsComp = mPlayer1->GetComponentOfType<PhysicsComponent>())
-	{
-		PlayerOnePhysicsComp->SetVelocity(PlayerOneVelocity);
-	}
-
-	if (std::shared_ptr<PhysicsComponent> PlayerTwoPhysicsComp = mPlayer2->GetComponentOfType<PhysicsComponent>())
-	{
-		PlayerTwoPhysicsComp->SetVelocity(PlayerTwoVelocity);
-	}
-
-	mEngine->DrawBox(p1, p2, c, 0);
+	//if (std::shared_ptr<PhysicsComponent> PlayerTwoPhysicsComp = mPlayer2->GetComponentOfType<PhysicsComponent>())
+	//{
+	//	PlayerTwoPhysicsComp->SetVelocity(PlayerTwoVelocity);
+	//}
 
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 	RENDER_ENGINE.RenderUpdate(mEngine);

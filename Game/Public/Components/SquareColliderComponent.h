@@ -2,14 +2,23 @@
 #include "Game/Public/Components/PhysicsComponent.h"
 #include "Engine/Public/EngineTypes.h"
 
-class SquareColliderComponent : public Component
+class SquareColliderComponent : public PhysicsComponent
 {
-	friend class Actor;
-
 public:
+
+	SquareColliderComponent() = delete;
+
+	SquareColliderComponent(std::weak_ptr<Actor> owner, float width, float height, exVector2 velocity = { 0.0f, 0.0f },
+		bool isStatic = false, bool isGravityEnabled = false);
+
+	virtual bool IsCollisionDetected(std::weak_ptr<PhysicsComponent>& otherComponent) override;
+	virtual void CollisionResolution() override;
+
 	float GetWidth() const;
 	float GetHeight() const;
+
 private:
-	exVector2 mP1; // Bottom-left corner (or min point)
-	exVector2 mP2; // Top-right corner (or max point)
+	float mWidth;
+	float mHeight;
+	exVector2 mCeneter;
 };
