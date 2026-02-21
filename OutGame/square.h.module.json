@@ -5,14 +5,14 @@
         {
             "primary-output": "OutGame\\Square.h.obj",
             "outputs": [
-                "C:\\Users\\Public\\Repos\\GameEngineCPP\\OutGame\\vc143.pdb",
+                "C:\\Users\\julia\\OneDrive\\Documentos\\Projects\\C++\\GameEngineCPP\\OutGame\\vc145.pdb",
                 "OutGame\\",
-                "C:\\Users\\Public\\Repos\\GameEngineCPP\\OutGame\\Square.h.ifc"
+                "C:\\Users\\julia\\OneDrive\\Documentos\\Projects\\C++\\GameEngineCPP\\OutGame\\Square.h.ifc"
             ],
             "provides": [
                 {
                     "logical-name": "Game\\Public\\Actors\\Square.h",
-                    "source-path": "c:\\users\\public\\repos\\gameenginecpp\\game\\public\\actors\\square.h",
+                    "source-path": "c:\\users\\julia\\onedrive\\documentos\\projects\\c++\\gameenginecpp\\game\\public\\actors\\square.h",
                     "lookup-method": "absolute"
                 }
             ],

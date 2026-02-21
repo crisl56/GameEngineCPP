@@ -1,11 +1,3 @@
-//
-// * ENGINE-X
-// * SAMPLE GAME
-//
-// + Game.cpp
-// implementation of MyGame, an implementation of exGameInterface
-//
-
 #include "Game/Public/Game.h"
 #include "Engine/Public/EngineInterface.h"
 #include "Engine/Public/SDL.h"
@@ -49,12 +41,6 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	// Score Renderer Creation
 	//-----------------------------------------------------------------
 	
-	// TODO: Add here Score Render creation
-	
-	// EXAMPLE
-	// Text
-	// mFontID = mEngine->LoadFont( "Resources/IndieFlower-Regular.ttf", 32 );
-	//
 	 mTextPosition.x = 50.0f;
 	 mTextPosition.y = 50.0f;
 
@@ -91,8 +77,6 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	//-----------------------------------------------------------------
 	// Paddles Creation
 	//-----------------------------------------------------------------
-	
-	// TODO: Add here paddles creation
 
 	const float PaddleSpeed = 7.0f;
 
@@ -102,14 +86,15 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	PaddleColor.mColor[2] = 115;
 	PaddleColor.mColor[3] = 255;
 
-	const float Paddle1Width = 40.0f;
-	const float Paddle1Height = 80.0f;
+	const float PaddleWidth = 20.0f;
+	const float PaddleHeight = 90.0f;
+
 	const exVector2 InitialPaddle1Position(100.0f, 250.0f);
 
-	mPlayer1 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle1Position.x, InitialPaddle1Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, Paddle1Width, Paddle1Height);
+	mPlayer1 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle1Position.x, InitialPaddle1Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, PaddleWidth, PaddleHeight);
 	
 	const exVector2 InitialPaddle2Position(700.0f, 250.0f);
-	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed ,PaddleColor, mPlayerTwoUp, mPlayerTwoDown, Paddle1Width, Paddle1Height);
+	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed ,PaddleColor, mPlayerTwoUp, mPlayerTwoDown, PaddleWidth, PaddleHeight);
 	
 	//-----------------------------------------------------------------
 	// Pong Ball Creation
@@ -145,12 +130,11 @@ const char* MyGame::GetWindowName() const
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-// exColor is a unsigned Char
 void MyGame::GetClearColor( exColor& color ) const
 {
-	color.mColor[0] = 128;
-	color.mColor[1] = 128;
-	color.mColor[2] = 128;
+	color.mColor[0] = 0;
+	color.mColor[1] = 0;
+	color.mColor[2] = 0;
 }
 
 //-----------------------------------------------------------------
@@ -167,28 +151,21 @@ void MyGame::OnEvent( SDL_Event* pEvent )
 
 void MyGame::OnEventsConsumed()
 {
-	int nKeys = 0;
-	const Uint8 *pState = SDL_GetKeyboardState( &nKeys ); // Updates nKeys to  an int
+	// Those keyboard inputs are already built in
+	// They are just enums as int 
+	// you can add up to 64
 
-	mUp = pState[SDL_SCANCODE_UP];
-	mDown = pState[SDL_SCANCODE_DOWN];
+	int nKeys = 0;
+	const Uint8 *pState = SDL_GetKeyboardState(&nKeys); // Updates nKeys to  an int
 
 	// Using up arrow and down arrow
 
 	*mPlayerOneUp = pState[SDL_SCANCODE_W];
 	*mPlayerOneDown = pState[SDL_SCANCODE_S];
 
-	//mPlayerOneUp = std::make_shared<bool>(pState[SDL_SCANCODE_UP]);
-	//mPlayerOneDown = std::make_shared<bool>(pState[SDL_SCANCODE_DOWN]);
-
 	// using w and s
 	*mPlayerTwoUp = pState[SDL_SCANCODE_UP];
 	*mPlayerTwoDown = pState[SDL_SCANCODE_DOWN];
-
-
-	// Those keyboard inputs are already built in
-	// They are just enums as int 
-	// you can add up to 64
 }
 
 //-----------------------------------------------------------------
@@ -199,7 +176,7 @@ void MyGame::OnEventsConsumed()
 //  - Delta is returned which is the time between each frame
 void MyGame::Run( float fDeltaT)
 {
-	SCORE_SYSTEM.SetP1Score(SCORE_SYSTEM.GetP1Score() + 1);
+	// SCORE_SYSTEM.SetP1Score(SCORE_SYSTEM.GetP1Score() + 1);
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 	RENDER_ENGINE.RenderUpdate(mEngine);
 	TICK_ENGINE.TickUpdate(fDeltaT);

@@ -5,14 +5,14 @@
         {
             "primary-output": "OutGame\\TickSystem.h.obj",
             "outputs": [
-                "C:\\Users\\Public\\Repos\\GameEngineCPP\\OutGame\\vc143.pdb",
+                "C:\\Users\\julia\\OneDrive\\Documentos\\Projects\\C++\\GameEngineCPP\\OutGame\\vc145.pdb",
                 "OutGame\\",
-                "C:\\Users\\Public\\Repos\\GameEngineCPP\\OutGame\\TickSystem.h.ifc"
+                "C:\\Users\\julia\\OneDrive\\Documentos\\Projects\\C++\\GameEngineCPP\\OutGame\\TickSystem.h.ifc"
             ],
             "provides": [
                 {
                     "logical-name": "Game\\Public\\SubSystems\\TickSystem.h",
-                    "source-path": "c:\\users\\public\\repos\\gameenginecpp\\game\\public\\subsystems\\ticksystem.h",
+                    "source-path": "c:\\users\\julia\\onedrive\\documentos\\projects\\c++\\gameenginecpp\\game\\public\\subsystems\\ticksystem.h",
                     "lookup-method": "absolute"
                 }
             ],

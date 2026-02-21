@@ -63,5 +63,4 @@ private:
 	std::shared_ptr<ScoreKeeper> mScoreKeeper;
 
 	std::shared_ptr<Ball>		mBall;
-	// std::shared_ptr<Square>		mSquare;
 };
