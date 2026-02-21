@@ -131,5 +131,22 @@ bool SquareColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 
 void SquareColliderComponent::CollisionResolution()
 {
+
+	// Change self color
+
+	if (!mOwner.expired())
+	{
+		exColor newColor;
+		newColor.mColor[0] = std::rand() % (255 - 1 + 1) + 1;
+		newColor.mColor[1] = std::rand() % (255 - 1 + 1) + 1;
+		newColor.mColor[2] = std::rand() % (255 - 1 + 1) + 1;
+		newColor.mColor[3] = std::rand() % (255 - 1 + 1) + 1;
+
+		if (const std::shared_ptr<RenderComponent> RenderComp = mOwner.lock()->GetComponentOfType<RenderComponent>())
+		{
+			RenderComp->SetColor(newColor);
+		}
+	}
+
 	PhysicsComponent::CollisionResolution();
 }

@@ -1,3 +1,5 @@
 ﻿  Scanning sources for module dependencies...
-  PlayerActor.cpp
+  PhysicsComponent.cpp
+  SquareColliderComponent.cpp
+  Generating Code...
   GameEngineX.vcxproj -> C:\Users\Public\Repos\GameEngineCPP\Build\GameEngineXd.exe

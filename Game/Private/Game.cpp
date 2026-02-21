@@ -90,7 +90,7 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	
 	// TODO: Add here paddles creation
 
-	const float PaddleSpeed = 10.0f;
+	const float PaddleSpeed = 7.0f;
 
 	exColor PaddleColor;
 	PaddleColor.mColor[0] = 115;
@@ -105,7 +105,7 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mPlayer1 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle1Position.x, InitialPaddle1Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, Paddle1Width, Paddle1Height);
 	
 	const exVector2 InitialPaddle2Position(700.0f, 250.0f);
-	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, Paddle1Width, Paddle1Height);
+	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed ,PaddleColor, mPlayerTwoUp, mPlayerTwoDown, Paddle1Width, Paddle1Height);
 	
 	//-----------------------------------------------------------------
 	// Pong Ball Creation
@@ -171,15 +171,15 @@ void MyGame::OnEventsConsumed()
 
 	// Using up arrow and down arrow
 
-	mPlayerOneUp = std::make_shared<bool>(pState[SDL_SCANCODE_UP]);
-	mPlayerOneDown = std::make_shared<bool>(pState[SDL_SCANCODE_DOWN]);
+	*mPlayerOneUp = pState[SDL_SCANCODE_W];
+	*mPlayerOneDown = pState[SDL_SCANCODE_S];
 
 	//mPlayerOneUp = std::make_shared<bool>(pState[SDL_SCANCODE_UP]);
 	//mPlayerOneDown = std::make_shared<bool>(pState[SDL_SCANCODE_DOWN]);
 
 	// using w and s
-	mPlayerTwoUp = pState[SDL_SCANCODE_W];
-	mPlayerTwoDown = pState[SDL_SCANCODE_S];
+	*mPlayerTwoUp = pState[SDL_SCANCODE_UP];
+	*mPlayerTwoDown = pState[SDL_SCANCODE_DOWN];
 
 
 	// Those keyboard inputs are already built in
@@ -195,38 +195,6 @@ void MyGame::OnEventsConsumed()
 //  - Delta is returned which is the time between each frame
 void MyGame::Run( float fDeltaT)
 {
-	//exVector2 PlayerOneVelocity(0.0f, 0.0f);
-	//if (mUp)
-	//{
-	//	PlayerOneVelocity.y = -2.5f;
-	//}
-
-	//if (mDown) 
-	//{
-	//	PlayerOneVelocity.y = 2.5f;
-	//}
-
-	//exVector2 PlayerTwoVelocity(0.0f, 0.0f);
-	//if (mPlayerTwoUp) 
-	//{
-	//	PlayerTwoVelocity.y = -2.5f;
-	//}
-
-	//if (mPlayerTwoDown)
-	//{
-	//	PlayerTwoVelocity.y = 2.5f;
-	//}
-
-	//if (std::shared_ptr<PhysicsComponent> PlayerOnePhysicsComp = mPlayer1->GetComponentOfType<PhysicsComponent>())
-	//{
-	//	PlayerOnePhysicsComp->SetVelocity(PlayerOneVelocity);
-	//}
-
-	//if (std::shared_ptr<PhysicsComponent> PlayerTwoPhysicsComp = mPlayer2->GetComponentOfType<PhysicsComponent>())
-	//{
-	//	PlayerTwoPhysicsComp->SetVelocity(PlayerTwoVelocity);
-	//}
-
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 	RENDER_ENGINE.RenderUpdate(mEngine);
 	TICK_ENGINE.TickUpdate(fDeltaT);

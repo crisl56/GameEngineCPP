@@ -46,11 +46,12 @@ private:
 	bool						mDown;
 
 	// TODO: Change these to unsigned ints later
-	std::shared_ptr<bool> mPlayerOneUp;
-	std::shared_ptr<bool> mPlayerOneDown;
+	std::shared_ptr<bool> mPlayerOneUp = std::make_shared<bool>(false);
+	std::shared_ptr<bool> mPlayerOneDown = std::make_shared<bool>(false);
 
-	bool mPlayerTwoUp;
-	bool mPlayerTwoDown;
+	std::shared_ptr<bool> mPlayerTwoUp = std::make_shared<bool>(false);
+	std::shared_ptr<bool> mPlayerTwoDown = std::make_shared<bool>(false);
+
 
 	exVector2					mTextPosition;
 

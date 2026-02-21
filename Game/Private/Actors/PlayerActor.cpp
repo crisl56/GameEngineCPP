@@ -32,7 +32,6 @@ void PlayerActor::Tick(const float DeltaSceonds)
 
 	exVector2 PlayerVelocity(0.0f, 0.0f);
 
-	if (mUpKey == nullptr || mDownKey == nullptr) return;
 
 	if (*mUpKey) {
 		PlayerVelocity.y = -mSpeed;
