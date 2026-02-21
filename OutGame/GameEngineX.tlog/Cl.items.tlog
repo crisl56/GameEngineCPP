@@ -20,3 +20,4 @@ C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Public\Actors
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Components\TextRenderComponent.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\TextRenderComponent.obj
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\SubSystems\TickSystem.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\TickSystem.obj
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Public\SubSystems\TickSystem.h;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\TickSystem.h.obj
+C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Actors\WallActor.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\WallActor.obj

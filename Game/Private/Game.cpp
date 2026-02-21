@@ -51,22 +51,21 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	//-----------------------------------------------------------------
 	// Pong Walls (Top & Bottom)
 	//-----------------------------------------------------------------
-	
-	// TODO: Add here pong walls creation
-	
-	// EXAMPLES
-	// Square
-	
-	// exVector2 Point1;
-	// exVector2 Point2;
-	//
-	// Point1.x = 500;
-	// Point1.y = 500;
-	//
-	// Point2.x = 600;
-	// Point2.y = 600;
 
-	// mSquare = Actor::SpawnActorOfType<Square>(exVector2(300.0f, 300.0f), Point1, Point2, Color1);
+	exColor WallColor;
+	WallColor.mColor[0] = 255;
+	WallColor.mColor[1] = 255;
+	WallColor.mColor[2] = 255;
+	WallColor.mColor[3] = 255;
+
+	const float WallWidth = 1000.0f;
+	const float WallHeight = 5.0f;
+
+	const exVector2 InitialTopWallPosition(500.0f, 100.0f);
+	mTopWall = Actor::SpawnActorOfType<WallActor>(exVector2(InitialTopWallPosition.x, InitialTopWallPosition.y), WallColor, WallWidth, WallHeight);
+
+	const exVector2 InitialBottomWallPosition(500.0f, 500.0f);
+	mBottomWall = Actor::SpawnActorOfType<WallActor>(exVector2(InitialBottomWallPosition.x, InitialBottomWallPosition.y), WallColor, WallWidth, WallHeight);
 	
 	//-----------------------------------------------------------------
 	// Goal Actors (Left & Right)
@@ -86,22 +85,21 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	PaddleColor.mColor[2] = 115;
 	PaddleColor.mColor[3] = 255;
 
-	const float PaddleWidth = 20.0f;
-	const float PaddleHeight = 90.0f;
+	const float PaddleWidth = 10.0f;
+	const float PaddleHeight = 80.0f;
 
-	const exVector2 InitialPaddle1Position(100.0f, 250.0f);
-
+	const exVector2 InitialPaddle1Position(100.0f, 300.0f);
 	mPlayer1 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle1Position.x, InitialPaddle1Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, PaddleWidth, PaddleHeight);
 	
-	const exVector2 InitialPaddle2Position(700.0f, 250.0f);
+	const exVector2 InitialPaddle2Position(700.0f, 300.0f);
 	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed ,PaddleColor, mPlayerTwoUp, mPlayerTwoDown, PaddleWidth, PaddleHeight);
 	
 	//-----------------------------------------------------------------
 	// Pong Ball Creation
 	//-----------------------------------------------------------------
 	
-	const float BallRadius = 25.0f;
-	const exVector2 BallInitialPosition(500.0f, 250.0f);
+	const float BallRadius = 20.0f;
+	const exVector2 BallInitialPosition(500.0f, 300.0f);
 	const exVector2 BallInitialVelocity(15.0f, 0.0f);
 	
 	exColor BallColor;

@@ -14,6 +14,7 @@
 #include "Actors/PlayerActor.h"
 #include "Actors/PlayerActor.h"
 #include "Actors/ScoreKeeper.h"
+#include "Actors/WallActor.h"
 
 class Ball;
 class Square;
@@ -59,6 +60,9 @@ private:
 
 	std::shared_ptr<PlayerActor> mPlayer1;
 	std::shared_ptr<PlayerActor> mPlayer2;
+
+	std::shared_ptr<WallActor> mTopWall;
+	std::shared_ptr<WallActor> mBottomWall;
 
 	std::shared_ptr<ScoreKeeper> mScoreKeeper;
 
