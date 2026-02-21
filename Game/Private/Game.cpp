@@ -55,8 +55,12 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	// Text
 	// mFontID = mEngine->LoadFont( "Resources/IndieFlower-Regular.ttf", 32 );
 	//
-	// mTextPosition.x = 50.0f;
-	// mTextPosition.y = 50.0f;
+	 mTextPosition.x = 50.0f;
+	 mTextPosition.y = 50.0f;
+
+	mFontID = mEngine->LoadFont("Resources/PixelifySans-VariableFont_wght.ttf", 32);
+
+	mScoreKeeper = Actor::SpawnActorOfType<ScoreKeeper>(mTextPosition, mFontID);
 	
 	//-----------------------------------------------------------------
 	// Pong Walls (Top & Bottom)
@@ -195,6 +199,7 @@ void MyGame::OnEventsConsumed()
 //  - Delta is returned which is the time between each frame
 void MyGame::Run( float fDeltaT)
 {
+	SCORE_SYSTEM.SetP1Score(SCORE_SYSTEM.GetP1Score() + 1);
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 	RENDER_ENGINE.RenderUpdate(mEngine);
 	TICK_ENGINE.TickUpdate(fDeltaT);
