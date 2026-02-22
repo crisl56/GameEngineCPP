@@ -3,6 +3,8 @@
 #include "Game/Public/Components/SquareRenderComponent.h"
 #include "Game/Public/Components/SquareColliderComponent.h"
 #include "Game/Public/Components/TransformComponent.h"
+#include "Game/Public/Components/PhysicsComponent.h"
+#include "Game/Public/Managers/GameManager.h"
 
 PlayerActor::PlayerActor(float speed, exColor color, std::shared_ptr<bool> upKey, std::shared_ptr<bool> downKey, float width, float height)
 	:mSpeed(speed),
@@ -21,6 +23,34 @@ void PlayerActor::BeginPlay()
 	// Add relevant components here
 	AddComponentOfType<SquareRenderComponent>(mColor, mWidth, mHeight);
 	AddComponentOfType<SquareColliderComponent>(mWidth, mHeight);
+
+	// Register a simple reset callback with the GameManager.
+	// When a round reset occurs, put this paddle back to its side and zero velocity.
+	GameManager::ResetEventSignature resetDel = [this]()
+	{
+		// Get transform and decide side by X position: left paddles are placed left, right paddles right.
+		auto transform = GetComponentOfType<TransformComponent>();
+		auto phys = GetComponentOfType<PhysicsComponent>();
+		if (!transform) return;
+
+		// If current X is less than middle assume left player; else right player.
+		exVector2 currentPos = transform->GetLocation();
+		if (currentPos.x <= 400.0f) // middle threshold (simple)
+		{
+			transform->SetLocation({ 100.0f, 300.0f });
+		}
+		else
+		{
+			transform->SetLocation({ 700.0f, 300.0f });
+		}
+
+		if (phys)
+		{
+			phys->SetVelocity({ 0.0f, 0.0f });
+		}
+	};
+
+	GameManager::GetInstance().ListenForReset(resetDel);
 }
 
 void PlayerActor::Tick(const float DeltaSceonds)

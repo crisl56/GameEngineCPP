@@ -2,7 +2,12 @@
 #include "Game/Public/Components/TransformComponent.h"
 #include "Game/Public/Components/CircleRenderComponent.h"
 #include "Game/Public/Components/CircleColliderComponent.h"
-#include "Game/Public/Utils.h"
+#include "Game/Public/Components/PhysicsComponent.h"
+#include "Game/Public/Managers/GameManager.h"
+#include "Game/Public/Managers/ScoreManager.h"
+#include "Game/Public/Actor.h"
+#include "Game/Public/SubSystems/PhysicsSystem.h"
+#include "Game/Public/SubSystems/ScoreSystem.h"
 
 Ball::Ball(float BallRadius, exColor BallColor)
 {
@@ -17,29 +22,61 @@ void Ball::BeginPlay()
 	AddComponentOfType<CircleRenderComponent>(mColor, mRadius);
 	AddComponentOfType<CircleColliderComponent>(mRadius);
 
-	// how transform????
-	
-	// std::tuple<std::shared_ptr<CircleColliderComponent>, bool, String> ResultCircleCollider = AddComponentOfType<CircleColliderComponent>(mRadius);
-	//
-	// if(std::shared_ptr<CircleColliderComponent> CircleColliderComp = std::get<0>(ResultCircleCollider))
-	// {
-	// 	CollisionEventSignature CollisionDelgate = std::bind(&Ball::OnCollision, this, std::placeholders::_1, std::placeholders::_2);
-	// 	CircleColliderComp->ListenForCollision(CollisionDelgate);
-	// }
+	// Register reset callback with GameManager so the ball is repositioned on round reset
+	GameManager::ResetEventSignature resetDel = [this]()
+	{
+		// Reset flag first
+		mHasScoredThisRound = false;
+
+		// Reset position
+		if (std::shared_ptr<TransformComponent> TransformComp = GetComponentOfType<TransformComponent>())
+		{
+			TransformComp->SetLocation({ kInitialX, kInitialY });
+		}
+
+		// Reset velocity
+		if (std::shared_ptr<PhysicsComponent> PhysComp = GetComponentOfType<PhysicsComponent>())
+		{
+			// Give a small random flip to X so rounds vary a bit
+			int sign = (std::rand() % 2) ? 1 : -1;
+			PhysComp->SetVelocity({ kInitialVelX * sign, kInitialVelY });
+		}
+	};
+
+	GameManager::GetInstance().ListenForReset(resetDel);
+
+	// Note: Game.cpp also sets an initial velocity after spawn; the reset callback will be used
+	// when rounds are reset (or at StartGame) to reposition the ball.
 }
 
+void Ball::Tick(const float DeltaSeconds)
+{
+	Actor::Tick(DeltaSeconds);
 
+	// Only check scoring when we have a transform
+	if (mHasScoredThisRound) return;
 
-// void Ball::OnCollision(std::weak_ptr<Actor>, const exVector2)
-// {
-// 	if (std::shared_ptr<RenderComponent> RenderComp = GetComponentOfType<RenderComponent>()) {
-//
-// 		exColor Color1;
-// 		Color1.mColor[0] = 20;
-// 		Color1.mColor[1] = 255;
-// 		Color1.mColor[2] = 120;
-// 		Color1.mColor[3] = 255;
-//
-// 		RenderComp->SetColor(Color1);
-// 	}
-// }
+	std::shared_ptr<TransformComponent> TransformComp = GetComponentOfType<TransformComponent>();
+	if (!TransformComp) return;
+
+	exVector2 pos = TransformComp->GetLocation();
+
+	// Left goal: ball passed left edge -> player 2 scores
+	if (pos.x <= kLeftGoalX)
+	{
+		mHasScoredThisRound = true;
+		ScoreManager::GetInstance().IncrementP2();
+		// Let GameManager reset the round (will call our reset callback)
+		GameManager::GetInstance().ResetRound();
+		return;
+	}
+
+	// Right goal: ball passed right edge -> player 1 scores
+	if (pos.x >= kRightGoalX)
+	{
+		mHasScoredThisRound = true;
+		ScoreManager::GetInstance().IncrementP1();
+		GameManager::GetInstance().ResetRound();
+		return;
+	}
+}

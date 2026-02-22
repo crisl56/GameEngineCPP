@@ -1,3 +1,12 @@
 ﻿  Scanning sources for module dependencies...
+  GameManager.cpp
+  Actor.cpp
+  Ball.cpp
   PlayerActor.cpp
+  Game.cpp
+  ScoreManager.cpp
+  Generating Code...
+EngineXd.lib(Engine.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(Engine.obj)' or at 'C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Build\EngineX.pdb'; linking object as if no debug info
+EngineXd.lib(RenderPacket.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(RenderPacket.obj)' or at 'C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Build\EngineX.pdb'; linking object as if no debug info
+EngineXd.lib(System.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(System.obj)' or at 'C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Build\EngineX.pdb'; linking object as if no debug info
   GameEngineX.vcxproj -> C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Build\GameEngineXd.exe

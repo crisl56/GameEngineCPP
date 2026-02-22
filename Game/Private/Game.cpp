@@ -7,6 +7,8 @@
 #include "Game/Public/SubSystems/PhysicsSystem.h"
 #include "Game/Public/SubSystems/RenderSystem.h"
 #include "Game/Public/SubSystems/TickSystem.h"
+#include"Game/Public/Managers/GameManager.h"
+#include "Game/Public/Managers/ScoreManager.h"
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -118,6 +120,15 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	{
 		BallPhysicsComp->SetVelocity(exVector2(BallInitialVelocity.x, BallInitialVelocity.y));
 	}
+
+	//-----------------------------------------------------------------
+	// Initialize Managers
+	//-----------------------------------------------------------------
+	
+	// Ensure scores start at zero and start the game loop via the GameManager.
+	// ScoreManager/GameManager are simple singletons: reset/notify as needed.
+	ScoreManager::GetInstance().ResetScores();
+	GameManager::GetInstance().StartGame();
 }
 
 //-----------------------------------------------------------------

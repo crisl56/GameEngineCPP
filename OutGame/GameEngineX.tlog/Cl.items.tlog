@@ -1,3 +1,4 @@
+C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Managers\GameManager.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\GameManager.obj
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Actor.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\Actor.obj
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Actors\Ball.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\Ball.obj
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Actors\PlayerActor.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\PlayerActor.obj
@@ -21,3 +22,4 @@ C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Compo
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\SubSystems\TickSystem.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\TickSystem.obj
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Public\SubSystems\TickSystem.h;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\TickSystem.h.obj
 C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Actors\WallActor.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\WallActor.obj
+C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\Game\Private\Managers\ScoreManager.cpp;C:\Users\julia\OneDrive\Documentos\Projects\C++\GameEngineCPP\OutGame\ScoreManager.obj

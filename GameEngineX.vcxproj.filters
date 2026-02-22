@@ -55,6 +55,8 @@
     <ClInclude Include="Game\Public\Components\TextRenderComponent.h" />
     <ClInclude Include="Game\Public\SubSystems\ScoreSystem.h" />
     <ClInclude Include="Game\Public\Actors\WallActor.h" />
+    <ClInclude Include="Game\Public\Managers\ScoreManager.h" />
+    <ClInclude Include="Game\Public\Managers\GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Private\Main.cpp">
@@ -124,6 +126,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Private\Actors\WallActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Managers\ScoreManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Managers\GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
