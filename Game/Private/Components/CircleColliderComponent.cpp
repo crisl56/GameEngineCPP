@@ -5,9 +5,14 @@
 #include <cmath>
 #include <cstdlib>
 
-CircleColliderComponent::CircleColliderComponent(std::weak_ptr<Actor> owner, float radius, exVector2 velocity, bool isStatic, bool isGravityEnabled) :
-    PhysicsComponent(owner, velocity, isStatic, isGravityEnabled), mRadius(radius)
+CircleColliderComponent::CircleColliderComponent(std::weak_ptr<Actor> owner, float radius,
+                                                 exVector2 velocity,
+                                                 bool isStatic,
+                                                 bool isGravityEnabled) :
+                                                 PhysicsComponent(owner, velocity, isStatic, isGravityEnabled),
+                                                 mRadius(radius)
 {
+    
 }
 
 bool CircleColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent>& otherComponent) 
@@ -110,17 +115,53 @@ bool CircleColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 }
 
 void CircleColliderComponent::CollisionResolution()
-{   
-    exVector2 CurrentVelocty = GetVelocity();
+{
+    // Get current velocity and invert it (basic reflection)
+    exVector2 currentVelocity = GetVelocity();
+    exVector2 inverted = currentVelocity * -1.0f;
 
-    // Inverse velocity then randomize direction (pong-like)
-    exVector2 ResolvedVelocity = CurrentVelocty * -1.0f;
+    // Compute current speed (magnitude)
+    float speed = std::sqrt((inverted.x * inverted.x) + (inverted.y * inverted.y));
+    if (speed < 1e-4f) {
+        // fallback speed if velocity was zero
+        speed = 200.0f;
+        inverted = exVector2{ speed, 0.0f };
+    }
 
-    // Change self color but clamp brightness so color is not too dark on black background
+    // Base angle from inverted velocity
+    const float PI = 3.14159265358979323846f;
+    float baseAngle = std::atan2(inverted.y, inverted.x);
+
+    // Add a small random angular jitter so bounces are not identical.
+    // Keep it small for predictable gameplay but variable enough to feel dynamic.
+    const float maxJitterDegrees = 20.0f; // small spread
+    float jitterNorm = (static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * 2.0f - 1.0f; // [-1,1]
+    float jitterRadians = jitterNorm * (maxJitterDegrees * (PI / 180.0f));
+    float finalAngle = baseAngle + jitterRadians;
+
+    // Slight random speed variation so repeated bounces don't result in identical speeds
+    const float maxSpeedVariation = 0.12f; // +/-12%
+    float speedVarNorm = (static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * 2.0f - 1.0f;
+    float speedMultiplier = 1.0f + (speedVarNorm * maxSpeedVariation);
+
+    exVector2 newVelocity;
+    newVelocity.x = std::cos(finalAngle) * speed * speedMultiplier;
+    newVelocity.y = std::sin(finalAngle) * speed * speedMultiplier;
+
+    // Clamp a reasonable maximum speed to avoid runaway
+    const float maxSpeed = 1200.0f;
+    float newSpeed = std::sqrt(newVelocity.x * newVelocity.x + newVelocity.y * newVelocity.y);
+    if (newSpeed > maxSpeed) {
+        float scale = maxSpeed / newSpeed;
+        newVelocity.x *= scale;
+        newVelocity.y *= scale;
+    }
+
+    // Color change: avoid too dark colors on black background (keep it visible)
     if (!mOwner.expired())
     {
         exColor newColor;
-        const int minBrightness = 120; // avoid too dark colors
+        const int minBrightness = 130; // avoid too dark colors
         const int maxValue = 255;
         int range = (maxValue - minBrightness) + 1;
         newColor.mColor[0] = (std::rand() % range) + minBrightness; // R
@@ -134,7 +175,7 @@ void CircleColliderComponent::CollisionResolution()
         }
     }
 
-    SetVelocity(ResolvedVelocity);
+    SetVelocity(newVelocity);
 }
 
 float CircleColliderComponent::GetRadius() const
