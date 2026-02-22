@@ -18,5 +18,4 @@ void Square::BeginPlay()
 
 void Square::OnCollision(std::weak_ptr<Actor>, const exVector2)
 {
-	// TODO: Create collision
 }

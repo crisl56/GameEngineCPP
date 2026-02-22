@@ -19,7 +19,7 @@ void ScoreKeeper::BeginPlay()
 	// Top-center of an 800x600 window — adjust to your resolution
 	exVector2 ScoreLocation;
 	ScoreLocation.x = 370.0f;
-	ScoreLocation.y = 20.0f;
+	ScoreLocation.y = 30.0f;
 
 	AddComponentOfType<TextRenderComponent>("0 - 0", 32.0f, mFontId, White, ScoreLocation);
 

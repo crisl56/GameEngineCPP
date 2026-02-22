@@ -2,6 +2,7 @@
 #include "Game/Public/Components/CircleColliderComponent.h"
 #include "Game/Public/Components/TransformComponent.h"
 #include "Game/Public/Actor.h"
+#include <algorithm>
 
 float SquareColliderComponent::GetWidth() const
 {
@@ -31,64 +32,64 @@ bool SquareColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 
 	// Collisions with circle collider components
 	if (std::shared_ptr<CircleColliderComponent> OtherCircleColliderComponent = std::dynamic_pointer_cast<CircleColliderComponent>(otherComponent.lock())) {
-		// Owner Center Pos
-		exVector2 SelfCenterPos;
+		// Rectangle (self) center
+		exVector2 RectCenter;
+		// Circle center
+		exVector2 CircleCenter;
 
-		// Other Circle Center Pos
-		exVector2 OtherCenterPos;
-
-		// Get Center Pos
+		// Get rectangle center (self)
 		if (!mOwner.expired())
 		{
 			if (const std::shared_ptr<TransformComponent> TransformComp = mOwner.lock()->GetComponentOfType<TransformComponent>())
 			{
-				SelfCenterPos = TransformComp->GetLocation();
+				RectCenter = TransformComp->GetLocation();
 			}
 		}
 
-		// Get Other Circle Pos
+		// Get circle center
 		if (!otherComponent.lock()->GetOwner().expired())
 		{
 			if (const std::shared_ptr<TransformComponent> TransformComp = OtherCircleColliderComponent->GetOwner().lock()->GetComponentOfType<TransformComponent>()) {
-				OtherCenterPos = TransformComp->GetLocation();
+				CircleCenter = TransformComp->GetLocation();
 			}
 		}
 
-		float testX = OtherCenterPos.x;
-		float testY = OtherCenterPos.y;
+		// Rectangle bounds (treat Transform location as center)
+		float halfW = mWidth * 0.5f;
+		float halfH = mHeight * 0.5f;
+		float rectMinX = RectCenter.x - halfW;
+		float rectMaxX = RectCenter.x + halfW;
+		float rectMinY = RectCenter.y - halfH;
+		float rectMaxY = RectCenter.y + halfH;
 
-		float circleX = OtherCenterPos.x;
-		float circleY = OtherCenterPos.y;
+		// Clamp circle center to rectangle to find closest point
+		auto clamp = [](float v, float lo, float hi) {
+			if (v < lo) return lo;
+			if (v > hi) return hi;
+			return v;
+		};
 
-		float selfX = SelfCenterPos.x;
-		float selfY = SelfCenterPos.y;
+		float closestX = clamp(CircleCenter.x, rectMinX, rectMaxX);
+		float closestY = clamp(CircleCenter.y, rectMinY, rectMaxY);
 
-		// closest edges
-		if (circleX < selfX - (mWidth / 2.0f)) { testX = selfX - (mWidth / 2.0f); }
-		else if (circleY < selfY + (mWidth / 2.0f)) { testX = selfX + (mWidth / 2.0f); }
+		// Squared distance from circle center to closest point on rectangle
+		float distX = CircleCenter.x - closestX;
+		float distY = CircleCenter.y - closestY;
+		float distanceSq = (distX * distX) + (distY * distY);
 
-		if (circleY < selfY - (mHeight / 2.0f)) { testY = selfY - (mHeight / 2.0f); }
-		else if (circleY > selfY + (mHeight / 2.0f)) { testY = selfY + (mHeight / 2.0f); }
-
-		float distX = circleX - testX;
-		float distY = circleY - testY;
-
-		float distance = (distX * distX) + (distY * distY);
 		float circleRadius = OtherCircleColliderComponent->GetRadius();
 
-		// check distance between the circle border and rectangle edge
-		return distance <= (circleRadius * circleRadius);
+		// Collision if squared distance <= squared radius
+		return distanceSq <= (circleRadius * circleRadius);
 	}
 
 	// Collisions with other squares
 	if (std::shared_ptr<SquareColliderComponent> OtherSquareColliderComponent = std::dynamic_pointer_cast<SquareColliderComponent>(otherComponent.lock())) {
 		// Owner Center Pos
 		exVector2 SelfCenterPos;
-
-		// Other Circle Center Pos
 		exVector2 OtherCenterPos;
 
-		// Get Center Pos
+		// Get Center Pos (self)
 		if (!mOwner.expired())
 		{
 			if (const std::shared_ptr<TransformComponent> TransformComp = mOwner.lock()->GetComponentOfType<TransformComponent>())
@@ -97,7 +98,7 @@ bool SquareColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 			}
 		}
 
-		// Get Other Circle Pos
+		// Get Other Center Pos
 		if (!otherComponent.lock()->GetOwner().expired())
 		{
 			if (const std::shared_ptr<TransformComponent> TransformComp = OtherSquareColliderComponent->GetOwner().lock()->GetComponentOfType<TransformComponent>()) {
@@ -105,48 +106,28 @@ bool SquareColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 			}
 		}
 
-		// Compare edges
-		float r1x = SelfCenterPos.x;
-		float r1y = SelfCenterPos.y;
-		float r1w = mWidth / 2.0f;
-		float r1h = mHeight / 2.0f;
+		// Convert to min/max AABB using centers and half extents
+		float r1MinX = SelfCenterPos.x - (mWidth * 0.5f);
+		float r1MaxX = SelfCenterPos.x + (mWidth * 0.5f);
+		float r1MinY = SelfCenterPos.y - (mHeight * 0.5f);
+		float r1MaxY = SelfCenterPos.y + (mHeight * 0.5f);
 
-		float r2x = OtherCenterPos.x;
-		float r2y = OtherCenterPos.y;
-		float r2w = OtherSquareColliderComponent->GetWidth() / 2.0f;
-		float r2h = OtherSquareColliderComponent->GetHeight() / 2.0f;
+		float r2MinX = OtherCenterPos.x - (OtherSquareColliderComponent->GetWidth() * 0.5f);
+		float r2MaxX = OtherCenterPos.x + (OtherSquareColliderComponent->GetWidth() * 0.5f);
+		float r2MinY = OtherCenterPos.y - (OtherSquareColliderComponent->GetHeight() * 0.5f);
+		float r2MaxY = OtherCenterPos.y + (OtherSquareColliderComponent->GetHeight() * 0.5f);
 
-		if (r1x + r1w >= r2x &&    
-			r1x <= r2x + r2w &&    
-			r1y + r1h >= r2y &&    
-			r1y <= r2y + r2h) {    
-			return true;
-		}
-		return false;
+		bool overlapX = (r1MinX <= r2MaxX) && (r1MaxX >= r2MinX);
+		bool overlapY = (r1MinY <= r2MaxY) && (r1MaxY >= r2MinY);
+
+		bool colliding = overlapX && overlapY;
+
+		return colliding;
 	}
-
 
 	return PhysicsComponent::IsCollisionDetected(otherComponent);
 }
 
 void SquareColliderComponent::CollisionResolution()
 {
-
-	// Change self color
-
-	if (!mOwner.expired())
-	{
-		exColor newColor;
-		newColor.mColor[0] = std::rand() % (255 - 1 + 1) + 1;
-		newColor.mColor[1] = std::rand() % (255 - 1 + 1) + 1;
-		newColor.mColor[2] = std::rand() % (255 - 1 + 1) + 1;
-		newColor.mColor[3] = std::rand() % (255 - 1 + 1) + 1;
-
-		if (const std::shared_ptr<RenderComponent> RenderComp = mOwner.lock()->GetComponentOfType<RenderComponent>())
-		{
-			RenderComp->SetColor(newColor);
-		}
-	}
-
-	PhysicsComponent::CollisionResolution();
 }

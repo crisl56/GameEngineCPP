@@ -1,6 +1,7 @@
 #pragma once
 #include "Game/Public/Components/PhysicsComponent.h"
 #include "Engine/Public/EngineTypes.h"
+#include <memory>
 
 class SquareColliderComponent : public PhysicsComponent
 {

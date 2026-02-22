@@ -80,27 +80,25 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	const float PaddleSpeed = 7.0f;
 
 	exColor PaddleColor;
-	PaddleColor.mColor[0] = 115;
-	PaddleColor.mColor[1] = 115;
-	PaddleColor.mColor[2] = 115;
+	PaddleColor.mColor[0] = 255;
+	PaddleColor.mColor[1] = 255;
+	PaddleColor.mColor[2] = 255;
 	PaddleColor.mColor[3] = 255;
 
 	const float PaddleWidth = 10.0f;
 	const float PaddleHeight = 80.0f;
 
 	const exVector2 InitialPaddle1Position(100.0f, 300.0f);
-	mPlayer1 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle1Position.x, InitialPaddle1Position.y), PaddleSpeed ,PaddleColor, mPlayerOneUp, mPlayerOneDown, PaddleWidth, PaddleHeight);
+	mPlayer1 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle1Position.x, InitialPaddle1Position.y), PaddleSpeed, PaddleColor, mPlayerOneUp, mPlayerOneDown, PaddleWidth, PaddleHeight);
 	
 	const exVector2 InitialPaddle2Position(700.0f, 300.0f);
-	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed ,PaddleColor, mPlayerTwoUp, mPlayerTwoDown, PaddleWidth, PaddleHeight);
+	mPlayer2 = Actor::SpawnActorOfType<PlayerActor>(exVector2(InitialPaddle2Position.x, InitialPaddle2Position.y), PaddleSpeed, PaddleColor, mPlayerTwoUp, mPlayerTwoDown, PaddleWidth, PaddleHeight);
 	
 	//-----------------------------------------------------------------
 	// Pong Ball Creation
 	//-----------------------------------------------------------------
 	
 	const float BallRadius = 20.0f;
-	const exVector2 BallInitialPosition(500.0f, 300.0f);
-	const exVector2 BallInitialVelocity(15.0f, 0.0f);
 	
 	exColor BallColor;
 	BallColor.mColor[0] = 255;
@@ -108,9 +106,14 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	BallColor.mColor[2] = 150;
 	BallColor.mColor[3] = 255;
 
+	const exVector2 BallInitialPosition(500.0f, 300.0f);
+
 	mBall = Actor::SpawnActorOfType<Ball>(exVector2(BallInitialPosition.x, BallInitialPosition.y), BallRadius, BallColor);
-	
+
+
 	// Initialize ball with an initial velocity
+	const exVector2 BallInitialVelocity(10.0f, 1.0f);
+
 	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall->GetComponentOfType<PhysicsComponent>()) 
 	{
 		BallPhysicsComp->SetVelocity(exVector2(BallInitialVelocity.x, BallInitialVelocity.y));
